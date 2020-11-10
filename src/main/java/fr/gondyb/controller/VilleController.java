@@ -23,7 +23,7 @@ public class VilleController {
 
 	@GetMapping("/villes")
 	public List<Ville> appelGet() {
-		return villeRepository.findAll();
+		return villeRepository.findAllByDeletedFalse();
 	}
 
 	@PostMapping("/villes")
