@@ -56,4 +56,32 @@ public class VilleController {
 
 		villeRepository.save(ville);
 	}
+
+	@GetMapping("/distanceBetween/{id1}/{id2}")
+	public Double distanceBetween(@PathVariable String id1, @PathVariable String id2) {
+		Ville v1 = villeRepository.findOne(id1);
+		Ville v2 = villeRepository.findOne(id2);
+
+		double lat1 = v1.getAttitude();
+		double lat2 = v2.getAttitude();
+		double lon1 = v1.getLongitude();
+		double lon2 = v2.getLongitude();
+
+		double theta = lon1 - lon2;
+		double dist = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+		dist = Math.acos(dist);
+		dist = rad2deg(dist);
+		dist = dist * 60 * 1.1515; // Miles
+		dist = dist * 1.609344; // Km
+
+		return dist;
+	}
+
+	private double deg2rad(double deg) {
+		return (deg * Math.PI / 180.0);
+	}
+
+	private double rad2deg(double rad) {
+		return (rad * 180.0 / Math.PI);
+	}
 }
