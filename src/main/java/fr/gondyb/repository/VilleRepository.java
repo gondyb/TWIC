@@ -9,6 +9,6 @@ import java.util.List;
 @Repository
 public interface VilleRepository extends JpaRepository<Ville, String> {
 
-    List<Ville> findAllByDeletedFalse();
+    List<Ville> findAllByDeletedFalseOrderByNomCommuneAsc();
 
 }

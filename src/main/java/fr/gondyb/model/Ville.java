@@ -31,7 +31,7 @@ public class Ville {
 	private String ligne;
 
 	@Column(name = "Latitude")
-	private Double attitude;
+	private Double latitude;
 
 	@Column(name = "Longitude")
 	private Double longitude;
